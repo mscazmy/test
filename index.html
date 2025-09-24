@@ -841,4 +841,227 @@
         }
         
         // Add event listeners for progress tracking
-        document.addEventListener('DOMContentLoade
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load existing data
+            loadData();
+            
+            // Add progress tracking to all form fields
+            const formFields = document.querySelectorAll('#dataForm input, #dataForm select, #dataForm textarea');
+            formFields.forEach(field => {
+                field.addEventListener('change', updateProgress);
+                field.addEventListener('input', updateProgress);
+            });
+            
+            // Add visual feedback for radio buttons and checkboxes
+            const radioItems = document.querySelectorAll('.radio-item');
+            radioItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    const name = radio.name;
+                    
+                    // Remove selected class from all items with same name
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.closest('.radio-item').classList.remove('selected');
+                    });
+                    
+                    // Add selected class to this item
+                    if (radio.checked) {
+                        this.classList.add('selected');
+                    }
+                });
+            });
+            
+            const checkboxItems = document.querySelectorAll('.checkbox-item');
+            checkboxItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    setTimeout(() => {
+                        if (checkbox.checked) {
+                            this.classList.add('selected');
+                        } else {
+                            this.classList.remove('selected');
+                        }
+                    }, 10);
+                });
+            });
+            
+            // Form validation
+            const form = document.getElementById('dataForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', validateField);
+                input.addEventListener('input', validateField);
+            });
+            
+            function validateField(e) {
+                const field = e.target;
+                if (field.checkValidity()) {
+                    field.style.borderColor = '#28a745';
+                } else if (field.value !== '') {
+                    field.style.borderColor = '#dc3545';
+                } else {
+                    field.style.borderColor = '#e9ecef';
+                }
+            }
+            
+            // Initialize progress
+            updateProgress();
+        });
+        
+        // Form reset handler
+        document.getElementById('dataForm').addEventListener('reset', function() {
+            // Remove all selected classes
+            document.querySelectorAll('.radio-item.selected, .checkbox-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Reset progress
+            setTimeout(updateProgress, 100);
+            
+            // Reset field styles
+            const fields = this.querySelectorAll('input, select, textarea');
+            fields.forEach(field => {
+                field.style.borderColor = '#e9ecef';
+            });
+        });
+        
+        // Export functions for additional formats
+        function downloadJSON() {
+            if (collectedData.length === 0) {
+                alert('No data to download!');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(collectedData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `research_data_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Statistics function
+        function generateStats() {
+            if (collectedData.length === 0) {
+                alert('No data for statistics!');
+                return;
+            }
+            
+            const stats = {
+                totalResponses: collectedData.length,
+                genderDistribution: {},
+                ageGroups: {},
+                educationLevels: {},
+                digitalHealthUsage: {},
+                averageAge: 0
+            };
+            
+            let totalAge = 0;
+            
+            collectedData.forEach(entry => {
+                // Gender distribution
+                stats.genderDistribution[entry.gender] = (stats.genderDistribution[entry.gender] || 0) + 1;
+                
+                // Age groups
+                const age = parseInt(entry.age);
+                totalAge += age;
+                const ageGroup = age < 30 ? '18-29' : age < 40 ? '30-39' : age < 50 ? '40-49' : age < 60 ? '50-59' : '60+';
+                stats.ageGroups[ageGroup] = (stats.ageGroups[ageGroup] || 0) + 1;
+                
+                // Education levels
+                stats.educationLevels[entry.education] = (stats.educationLevels[entry.education] || 0) + 1;
+                
+                // Digital health usage
+                stats.digitalHealthUsage[entry.digitalHealthUsage] = (stats.digitalHealthUsage[entry.digitalHealthUsage] || 0) + 1;
+            });
+            
+            stats.averageAge = Math.round(totalAge / collectedData.length);
+            
+            // Display stats in popup
+            const popup = window.open('', '_blank', 'width=600,height=800,scrollbars=yes');
+            popup.document.write(`
+                <html>
+                    <head>
+                        <title>Data Statistics</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; }
+                            .stat-section { margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+                            .stat-item { display: flex; justify-content: space-between; padding: 5px 0; }
+                            h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+                            .highlight { background: #f0f8ff; padding: 10px; border-radius: 5px; margin: 10px 0; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Research Data Statistics</h1>
+                        
+                        <div class="highlight">
+                            <h3>Summary</h3>
+                            <p><strong>Total Responses:</strong> ${stats.totalResponses}</p>
+                            <p><strong>Average Age:</strong> ${stats.averageAge} years</p>
+                            <p><strong>Data Collection Period:</strong> ${new Date(collectedData[0].timestamp).toLocaleDateString()} - ${new Date(collectedData[collectedData.length-1].timestamp).toLocaleDateString()}</p>
+                        </div>
+                        
+                        <div class="stat-section">
+                            <h2>Gender Distribution</h2>
+                            ${Object.entries(stats.genderDistribution).map(([gender, count]) => 
+                                `<div class="stat-item"><span>${gender}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="stat-section">
+                            <h2>Age Groups</h2>
+                            ${Object.entries(stats.ageGroups).map(([group, count]) => 
+                                `<div class="stat-item"><span>${group}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="stat-section">
+                            <h2>Education Levels</h2>
+                            ${Object.entries(stats.educationLevels).map(([level, count]) => 
+                                `<div class="stat-item"><span>${level}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="stat-section">
+                            <h2>Digital Health Usage</h2>
+                            ${Object.entries(stats.digitalHealthUsage).map(([usage, count]) => 
+                                `<div class="stat-item"><span>${usage}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
+                            ).join('')}
+                        </div>
+                    </body>
+                </html>
+            `);
+        }
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + S to save/download CSV
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                downloadCSV();
+            }
+            
+            // Ctrl/Cmd + D to download JSON
+            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+                e.preventDefault();
+                downloadJSON();
+            }
+        });
+    </script>
+    
+    <!-- Add additional admin buttons -->
+    <div style="text-align: center; margin-top: 20px; padding: 20px;">
+        <button onclick="downloadJSON()" class="btn" style="background: #6f42c1; color: white;">
+            <i class="fas fa-file-code"></i> Download JSON
+        </button>
+        <button onclick="generateStats()" class="btn" style="background: #fd7e14; color: white;">
+            <i class="fas fa-chart-bar"></i> View Statistics
+        </button>
+    </div>
+</body>
+</html>
