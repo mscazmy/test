@@ -3,1065 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Data Collection Form</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Data Collection Form</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
-        
+
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 40px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
             text-align: center;
-            position: relative;
+            color: white;
         }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)" /></svg>');
-            opacity: 0.3;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-        
+
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
             font-weight: 300;
+            margin-bottom: 10px;
         }
-        
+
         .header p {
+            font-size: 1.1rem;
             opacity: 0.9;
-            font-size: 1.1em;
         }
-        
+
         .form-container {
-            padding: 50px 40px;
+            padding: 40px;
         }
-        
-        .form-section {
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            font-size: 1.4em;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e9ecef;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
+
         .form-group {
             margin-bottom: 25px;
+            animation: fadeInUp 0.6s ease-out;
         }
-        
+
         .form-group label {
             display: block;
-            font-weight: 600;
-            color: #2c3e50;
             margin-bottom: 8px;
-            font-size: 1em;
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
         }
-        
-        .required {
-            color: #e74c3c;
-        }
-        
-        .form-control {
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1em;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
             transition: all 0.3s ease;
             background: #f8f9fa;
         }
-        
-        .form-control:focus {
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #4facfe;
             background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.1);
+            transform: translateY(-2px);
         }
-        
-        .form-control:valid {
-            border-color: #28a745;
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
         }
-        
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-        
-        .radio-group, .checkbox-group {
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-group {
             display: flex;
-            flex-wrap: wrap;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
-        
-        .radio-item, .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f8f9fa;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .radio-item:hover, .checkbox-item:hover {
-            background: #e9ecef;
-        }
-        
-        .radio-item input, .checkbox-item input {
-            margin: 0;
-        }
-        
-        .radio-item.selected, .checkbox-item.selected {
-            background: #667eea;
-            color: white;
-        }
-        
-        .likert-scale {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-        
-        .likert-option {
-            text-align: center;
-            flex: 1;
-        }
-        
-        .likert-option input[type="radio"] {
-            transform: scale(1.5);
-            margin-bottom: 8px;
-        }
-        
-        .likert-label {
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        .textarea {
-            min-height: 120px;
-            resize: vertical;
-            font-family: inherit;
-        }
-        
-        .submit-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 40px;
-        }
-        
+
         .btn {
             padding: 15px 30px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1em;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            margin: 10px;
+            gap: 8px;
+            flex: 1;
+            min-width: 150px;
+            justify-content: center;
         }
-        
+
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
-        
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+        }
+
         .btn-success {
-            background: #28a745;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
         }
-        
+
         .btn-success:hover {
-            background: #218838;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
         }
-        
-        .btn-info {
-            background: #17a2b8;
-            color: white;
-        }
-        
-        .btn-info:hover {
-            background: #138496;
-            transform: translateY(-2px);
-        }
-        
-        .admin-panel {
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
-            margin-top: 50px;
-            border-radius: 15px;
-        }
-        
-        .admin-title {
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
+
         .data-summary {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            margin-top: 40px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border-left: 5px solid #4facfe;
         }
-        
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
+
+        .data-summary h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
         }
-        
-        .data-preview {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 8px;
-            max-height: 200px;
-            overflow-y: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-        }
-        
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #28a745;
-            display: none;
-        }
-        
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #dc3545;
-            display: none;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-            
-            .header {
-                padding: 30px 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .form-container {
-                padding: 30px 20px;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .radio-group, .checkbox-group {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .likert-scale {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .admin-panel {
-                padding: 20px;
-                margin-top: 30px;
-            }
-        }
-        
-        .progress-bar {
+
+        .data-table {
             width: 100%;
-            height: 6px;
-            background: #e9ecef;
-            border-radius: 3px;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.3s ease;
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group.required label::after {
+            content: " *";
+            color: #e74c3c;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
-            <div class="header-content">
-                <h1><i class="fas fa-clipboard-list"></i> Research Data Collection</h1>
-                <p>Please fill out this form completely. Your responses are important for our research.</p>
-            </div>
+            <h1>📊 Data Collection Hub</h1>
+            <p>Collect, store, and export your data seamlessly</p>
         </div>
         
-        <!-- Progress Bar -->
-        <div style="padding: 20px 40px 0;">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <p style="text-align: center; color: #666; margin-bottom: 0;">Form Progress: <span id="progressText">0%</span></p>
-        </div>
-        
-        <!-- Form Container -->
         <div class="form-container">
-            <!-- Success/Error Messages -->
-            <div id="successMessage" class="success-message">
-                <i class="fas fa-check-circle"></i> Thank you! Your response has been recorded successfully.
+            <div id="successMessage" class="success-message" style="display: none;">
+                ✅ Data submitted successfully!
             </div>
-            <div id="errorMessage" class="error-message">
-                <i class="fas fa-exclamation-triangle"></i> Please fill out all required fields before submitting.
-            </div>
-            
-            <!-- Main Form -->
+
             <form id="dataForm">
-                <!-- Personal Information Section -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <i class="fas fa-user"></i> Personal Information
-                    </h2>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name <span class="required">*</span></label>
-                            <input type="text" id="firstName" name="firstName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name <span class="required">*</span></label>
-                            <input type="text" id="lastName" name="lastName" class="form-control" required>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group required">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="age">Age <span class="required">*</span></label>
-                            <input type="number" id="age" name="age" class="form-control" min="18" max="100" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="gender">Gender <span class="required">*</span></label>
-                            <select id="gender" name="gender" class="form-control" required>
-                                <option value="">Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                                <option value="prefer-not-to-say">Prefer not to say</option>
-                            </select>
-                        </div>
+                    <div class="form-group required">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
                 </div>
-                
-                <!-- Education & Background Section -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <i class="fas fa-graduation-cap"></i> Education & Background
-                    </h2>
-                    
+
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="education">Highest Education Level <span class="required">*</span></label>
-                        <select id="education" name="education" class="form-control" required>
-                            <option value="">Select Education Level</option>
-                            <option value="high-school">High School</option>
-                            <option value="bachelor">Bachelor's Degree</option>
-                            <option value="master">Master's Degree</option>
-                            <option value="phd">PhD/Doctorate</option>
-                            <option value="other">Other</option>
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="1" max="150">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department">
+                            <option value="">Select Department</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="HR">Human Resources</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="profession">Current Profession/Field</label>
-                        <input type="text" id="profession" name="profession" class="form-control" placeholder="e.g., Healthcare, Education, Technology">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="experience">Years of Experience in Current Field</label>
-                        <select id="experience" name="experience" class="form-control">
-                            <option value="">Select Experience</option>
-                            <option value="0-1">0-1 years</option>
-                            <option value="2-5">2-5 years</option>
-                            <option value="6-10">6-10 years</option>
-                            <option value="11-15">11-15 years</option>
-                            <option value="16+">16+ years</option>
-                        </select>
+                        <label for="experience">Years of Experience</label>
+                        <input type="number" id="experience" name="experience" min="0" max="50">
                     </div>
                 </div>
-                
-                <!-- Research Questions Section -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <i class="fas fa-question-circle"></i> Research Questions
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label>How often do you use digital health tools? <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <label class="radio-item">
-                                <input type="radio" name="digitalHealthUsage" value="daily" required>
-                                <span>Daily</span>
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="digitalHealthUsage" value="weekly" required>
-                                <span>Weekly</span>
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="digitalHealthUsage" value="monthly" required>
-                                <span>Monthly</span>
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="digitalHealthUsage" value="rarely" required>
-                                <span>Rarely</span>
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="digitalHealthUsage" value="never" required>
-                                <span>Never</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Which health topics interest you most? (Select all that apply)</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="healthInterests" value="nutrition">
-                                <span>Nutrition</span>
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="healthInterests" value="exercise">
-                                <span>Exercise & Fitness</span>
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="healthInterests" value="mental-health">
-                                <span>Mental Health</span>
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="healthInterests" value="preventive-care">
-                                <span>Preventive Care</span>
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="healthInterests" value="chronic-disease">
-                                <span>Chronic Disease Management</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Please rate your agreement with the following statement: "Digital health tools improve healthcare access"</label>
-                        <div class="likert-scale">
-                            <div class="likert-option">
-                                <input type="radio" name="digitalHealthAccess" value="1" required>
-                                <div class="likert-label">Strongly Disagree</div>
-                            </div>
-                            <div class="likert-option">
-                                <input type="radio" name="digitalHealthAccess" value="2" required>
-                                <div class="likert-label">Disagree</div>
-                            </div>
-                            <div class="likert-option">
-                                <input type="radio" name="digitalHealthAccess" value="3" required>
-                                <div class="likert-label">Neutral</div>
-                            </div>
-                            <div class="likert-option">
-                                <input type="radio" name="digitalHealthAccess" value="4" required>
-                                <div class="likert-label">Agree</div>
-                            </div>
-                            <div class="likert-option">
-                                <input type="radio" name="digitalHealthAccess" value="5" required>
-                                <div class="likert-label">Strongly Agree</div>
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="form-group">
+                    <label for="feedback">Comments/Feedback</label>
+                    <textarea id="feedback" name="feedback" placeholder="Please share your thoughts..."></textarea>
                 </div>
-                
-                <!-- Open-Ended Questions Section -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <i class="fas fa-comments"></i> Additional Comments
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label for="challenges">What are the main challenges you face in accessing healthcare? (Optional)</label>
-                        <textarea id="challenges" name="challenges" class="form-control textarea" rows="4" placeholder="Please describe any challenges you experience..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="suggestions">Do you have any suggestions for improving healthcare services? (Optional)</label>
-                        <textarea id="suggestions" name="suggestions" class="form-control textarea" rows="4" placeholder="Please share your suggestions..."></textarea>
-                    </div>
-                </div>
-                
-                <!-- Submit Section -->
-                <div class="submit-section">
+
+                <div class="btn-group">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Submit Response
+                        📝 Submit Data
                     </button>
-                    <button type="reset" class="btn btn-info">
-                        <i class="fas fa-redo"></i> Clear Form
+                    <button type="button" class="btn btn-secondary" onclick="downloadCSV()">
+                        📥 Download CSV
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="clearAllData()">
+                        🗑️ Clear All Data
                     </button>
                 </div>
             </form>
-        </div>
-        
-        <!-- Admin Panel -->
-        <div class="admin-panel">
-            <h3 class="admin-title">
-                <i class="fas fa-cog"></i> Data Management Panel
-            </h3>
-            
+
             <div class="data-summary">
-                <div class="summary-item">
-                    <span>Total Responses:</span>
-                    <span id="totalResponses">0</span>
-                </div>
-                <div class="summary-item">
-                    <span>Last Response:</span>
-                    <span id="lastResponse">Never</span>
-                </div>
-                <div class="summary-item">
-                    <span>Data Size:</span>
-                    <span id="dataSize">0 KB</span>
-                </div>
-            </div>
-            
-            <div class="data-preview" id="dataPreview">
-                No data collected yet...
-            </div>
-            
-            <div style="text-align: center;">
-                <button onclick="downloadCSV()" class="btn btn-success">
-                    <i class="fas fa-download"></i> Download CSV
-                </button>
-                <button onclick="clearAllData()" class="btn" style="background: #e74c3c; color: white;">
-                    <i class="fas fa-trash"></i> Clear All Data
-                </button>
-                <button onclick="viewData()" class="btn btn-info">
-                    <i class="fas fa-eye"></i> View All Data
-                </button>
+                <h3>📈 Collected Data Summary</h3>
+                <p><strong>Total Entries:</strong> <span id="totalEntries">0</span></p>
+                <div id="dataTableContainer"></div>
             </div>
         </div>
     </div>
-    
+
     <script>
-        // Data storage in memory
-        let collectedData = [];
-        
-        // Load existing data from localStorage if available
-        function loadData() {
-            const saved = localStorage.getItem('researchData');
-            if (saved) {
-                collectedData = JSON.parse(saved);
-                updateDataSummary();
-                updateDataPreview();
-            }
-        }
-        
-        // Save data to localStorage
-        function saveData() {
-            localStorage.setItem('researchData', JSON.stringify(collectedData));
-        }
-        
-        // Form submission handler
-        document.getElementById('dataForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Data storage
+        let collectedData = JSON.parse(localStorage.getItem('formData') || '[]');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDataDisplay();
             
-            const formData = new FormData(this);
-            const entry = {};
-            
-            // Get all form fields
-            for (let [key, value] of formData.entries()) {
-                if (entry[key]) {
-                    // Handle multiple values (checkboxes)
-                    if (Array.isArray(entry[key])) {
-                        entry[key].push(value);
-                    } else {
-                        entry[key] = [entry[key], value];
-                    }
-                } else {
-                    entry[key] = value;
-                }
-            }
-            
-            // Handle checkboxes specifically
-            const healthInterests = formData.getAll('healthInterests');
-            if (healthInterests.length > 0) {
-                entry.healthInterests = healthInterests.join(', ');
-            }
-            
-            // Add timestamp and ID
-            entry.timestamp = new Date().toISOString();
-            entry.id = Date.now();
-            
-            // Add to collection
-            collectedData.push(entry);
-            saveData();
-            
-            // Update UI
-            updateDataSummary();
-            updateDataPreview();
-            showSuccessMessage();
-            
-            // Reset form
-            this.reset();
-            updateProgress();
+            // Add form submission handler
+            document.getElementById('dataForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitForm();
+            });
         });
-        
-        // Show success message
-        function showSuccessMessage() {
+
+        function submitForm() {
+            const form = document.getElementById('dataForm');
+            const formData = new FormData(form);
+            
+            // Create data object
+            const dataEntry = {
+                timestamp: new Date().toLocaleString(),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone') || '',
+                age: formData.get('age') || '',
+                department: formData.get('department') || '',
+                experience: formData.get('experience') || '',
+                feedback: formData.get('feedback') || ''
+            };
+
+            // Add to collection
+            collectedData.push(dataEntry);
+            
+            // Save to localStorage
+            localStorage.setItem('formData', JSON.stringify(collectedData));
+            
+            // Show success message
             const successMsg = document.getElementById('successMessage');
             successMsg.style.display = 'block';
             setTimeout(() => {
                 successMsg.style.display = 'none';
-            }, 5000);
+            }, 3000);
             
-            // Scroll to top
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            // Reset form
+            form.reset();
+            
+            // Update display
+            updateDataDisplay();
         }
-        
-        // Update data summary
-        function updateDataSummary() {
-            document.getElementById('totalResponses').textContent = collectedData.length;
+
+        function updateDataDisplay() {
+            document.getElementById('totalEntries').textContent = collectedData.length;
             
-            if (collectedData.length > 0) {
-                const lastEntry = collectedData[collectedData.length - 1];
-                document.getElementById('lastResponse').textContent = 
-                    new Date(lastEntry.timestamp).toLocaleString();
-            }
+            const tableContainer = document.getElementById('dataTableContainer');
             
-            const dataStr = JSON.stringify(collectedData);
-            const sizeKB = Math.round(new Blob([dataStr]).size / 1024);
-            document.getElementById('dataSize').textContent = sizeKB + ' KB';
-        }
-        
-        // Update data preview
-        function updateDataPreview() {
-            const preview = document.getElementById('dataPreview');
             if (collectedData.length === 0) {
-                preview.textContent = 'No data collected yet...';
+                tableContainer.innerHTML = '<p>No data collected yet. Submit the form to see entries here.</p>';
                 return;
             }
-            
-            const latest = collectedData.slice(-3); // Show last 3 entries
-            let previewText = 'Recent Entries:\n\n';
-            
-            latest.forEach((entry, index) => {
-                previewText += `Entry ${collectedData.length - latest.length + index + 1}:\n`;
-                previewText += `Name: ${entry.firstName} ${entry.lastName}\n`;
-                previewText += `Email: ${entry.email}\n`;
-                previewText += `Submitted: ${new Date(entry.timestamp).toLocaleString()}\n`;
-                previewText += '---\n';
+
+            let tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Age</th>
+                            <th>Department</th>
+                            <th>Experience</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            collectedData.forEach(entry => {
+                tableHTML += `
+                    <tr>
+                        <td>${entry.timestamp}</td>
+                        <td>${entry.name}</td>
+                        <td>${entry.email}</td>
+                        <td>${entry.phone}</td>
+                        <td>${entry.age}</td>
+                        <td>${entry.department}</td>
+                        <td>${entry.experience}</td>
+                    </tr>
+                `;
             });
-            
-            preview.textContent = previewText;
+
+            tableHTML += '</tbody></table>';
+            tableContainer.innerHTML = tableHTML;
         }
-        
-        // Download CSV function
+
         function downloadCSV() {
             if (collectedData.length === 0) {
-                alert('No data to download!');
+                alert('No data to download. Please submit some entries first.');
                 return;
             }
-            
-            // Get all unique keys
-            const allKeys = new Set();
-            collectedData.forEach(entry => {
-                Object.keys(entry).forEach(key => allKeys.add(key));
-            });
-            
-            const headers = Array.from(allKeys);
-            
+
             // Create CSV content
-            let csv = headers.join(',') + '\n';
-            
+            const headers = ['Timestamp', 'Name', 'Email', 'Phone', 'Age', 'Department', 'Experience (Years)', 'Comments/Feedback'];
+            let csvContent = headers.join(',') + '\n';
+
             collectedData.forEach(entry => {
-                const row = headers.map(header => {
-                    const value = entry[header] || '';
-                    // Escape commas and quotes
-                    return `"${String(value).replace(/"/g, '""')}"`;
-                });
-                csv += row.join(',') + '\n';
+                const row = [
+                    entry.timestamp,
+                    entry.name,
+                    entry.email,
+                    entry.phone,
+                    entry.age,
+                    entry.department,
+                    entry.experience,
+                    '"' + (entry.feedback || '').replace(/"/g, '""') + '"' // Escape quotes in feedback
+                ];
+                csvContent += row.join(',') + '\n';
             });
-            
-            // Download file
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `research_data_${new Date().toISOString().split('T')[0]}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
+
+            // Create and download file
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `collected_data_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
-        
-        // Clear all data
+
         function clearAllData() {
-            if (confirm('Are you sure you want to delete ALL collected data? This cannot be undone!')) {
+            if (confirm('Are you sure you want to clear all collected data? This action cannot be undone.')) {
                 collectedData = [];
-                localStorage.removeItem('researchData');
-                updateDataSummary();
-                updateDataPreview();
+                localStorage.removeItem('formData');
+                updateDataDisplay();
                 alert('All data has been cleared.');
             }
         }
-        
-        // View all data in popup
-        function viewData() {
-            if (collectedData.length === 0) {
-                alert('No data to view!');
-                return;
-            }
-            
-            const popup = window.open('', '_blank', 'width=800,height=600,scrollbars=yes');
-            popup.document.write(`
-                <html>
-                    <head>
-                        <title>Collected Data</title>
-                        <style>
-                            body { font-family: Arial, sans-serif; margin: 20px; }
-                            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                            th { background-color: #f2f2f2; }
-                            .entry { margin-bottom: 30px; padding: 20px; border: 1px solid #ccc; }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>Research Data Collection Results</h1>
-                        <p>Total Entries: ${collectedData.length}</p>
-                        <hr>
-                        ${collectedData.map((entry, index) => `
-                            <div class="entry">
-                                <h3>Entry #${index + 1}</h3>
-                                <p><strong>Submitted:</strong> ${new Date(entry.timestamp).toLocaleString()}</p>
-                                ${Object.entries(entry).map(([key, value]) => 
-                                    key !== 'timestamp' && key !== 'id' ? 
-                                    `<p><strong>${key}:</strong> ${value}</p>` : ''
-                                ).join('')}
-                            </div>
-                        `).join('')}
-                    </body>
-                </html>
-            `);
-        }
-        
-        // Progress tracking
-        function updateProgress() {
-            const form = document.getElementById('dataForm');
-            const requiredFields = form.querySelectorAll('[required]');
-            const filledFields = Array.from(requiredFields).filter(field => {
-                if (field.type === 'radio') {
-                    return form.querySelector(`input[name="${field.name}"]:checked`);
-                }
-                return field.value.trim() !== '';
-            });
-            
-            const progress = (filledFields.length / requiredFields.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressText').textContent = Math.round(progress) + '%';
-        }
-        
-        // Add event listeners for progress tracking
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load existing data
-            loadData();
-            
-            // Add progress tracking to all form fields
-            const formFields = document.querySelectorAll('#dataForm input, #dataForm select, #dataForm textarea');
-            formFields.forEach(field => {
-                field.addEventListener('change', updateProgress);
-                field.addEventListener('input', updateProgress);
-            });
-            
-            // Add visual feedback for radio buttons and checkboxes
-            const radioItems = document.querySelectorAll('.radio-item');
-            radioItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const radio = this.querySelector('input[type="radio"]');
-                    const name = radio.name;
-                    
-                    // Remove selected class from all items with same name
-                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
-                        r.closest('.radio-item').classList.remove('selected');
-                    });
-                    
-                    // Add selected class to this item
-                    if (radio.checked) {
-                        this.classList.add('selected');
-                    }
-                });
-            });
-            
-            const checkboxItems = document.querySelectorAll('.checkbox-item');
-            checkboxItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const checkbox = this.querySelector('input[type="checkbox"]');
-                    setTimeout(() => {
-                        if (checkbox.checked) {
-                            this.classList.add('selected');
-                        } else {
-                            this.classList.remove('selected');
-                        }
-                    }, 10);
-                });
-            });
-            
-            // Form validation
-            const form = document.getElementById('dataForm');
-            const inputs = form.querySelectorAll('input, select, textarea');
-            
-            inputs.forEach(input => {
-                input.addEventListener('blur', validateField);
-                input.addEventListener('input', validateField);
-            });
-            
-            function validateField(e) {
-                const field = e.target;
-                if (field.checkValidity()) {
-                    field.style.borderColor = '#28a745';
-                } else if (field.value !== '') {
-                    field.style.borderColor = '#dc3545';
-                } else {
-                    field.style.borderColor = '#e9ecef';
-                }
-            }
-            
-            // Initialize progress
-            updateProgress();
-        });
-        
-        // Form reset handler
-        document.getElementById('dataForm').addEventListener('reset', function() {
-            // Remove all selected classes
-            document.querySelectorAll('.radio-item.selected, .checkbox-item.selected').forEach(item => {
-                item.classList.remove('selected');
-            });
-            
-            // Reset progress
-            setTimeout(updateProgress, 100);
-            
-            // Reset field styles
-            const fields = this.querySelectorAll('input, select, textarea');
-            fields.forEach(field => {
-                field.style.borderColor = '#e9ecef';
-            });
-        });
-        
-        // Export functions for additional formats
-        function downloadJSON() {
-            if (collectedData.length === 0) {
-                alert('No data to download!');
-                return;
-            }
-            
-            const dataStr = JSON.stringify(collectedData, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `research_data_${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-        
-        // Statistics function
-        function generateStats() {
-            if (collectedData.length === 0) {
-                alert('No data for statistics!');
-                return;
-            }
-            
-            const stats = {
-                totalResponses: collectedData.length,
-                genderDistribution: {},
-                ageGroups: {},
-                educationLevels: {},
-                digitalHealthUsage: {},
-                averageAge: 0
-            };
-            
-            let totalAge = 0;
-            
-            collectedData.forEach(entry => {
-                // Gender distribution
-                stats.genderDistribution[entry.gender] = (stats.genderDistribution[entry.gender] || 0) + 1;
-                
-                // Age groups
-                const age = parseInt(entry.age);
-                totalAge += age;
-                const ageGroup = age < 30 ? '18-29' : age < 40 ? '30-39' : age < 50 ? '40-49' : age < 60 ? '50-59' : '60+';
-                stats.ageGroups[ageGroup] = (stats.ageGroups[ageGroup] || 0) + 1;
-                
-                // Education levels
-                stats.educationLevels[entry.education] = (stats.educationLevels[entry.education] || 0) + 1;
-                
-                // Digital health usage
-                stats.digitalHealthUsage[entry.digitalHealthUsage] = (stats.digitalHealthUsage[entry.digitalHealthUsage] || 0) + 1;
-            });
-            
-            stats.averageAge = Math.round(totalAge / collectedData.length);
-            
-            // Display stats in popup
-            const popup = window.open('', '_blank', 'width=600,height=800,scrollbars=yes');
-            popup.document.write(`
-                <html>
-                    <head>
-                        <title>Data Statistics</title>
-                        <style>
-                            body { font-family: Arial, sans-serif; margin: 20px; }
-                            .stat-section { margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
-                            .stat-item { display: flex; justify-content: space-between; padding: 5px 0; }
-                            h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-                            .highlight { background: #f0f8ff; padding: 10px; border-radius: 5px; margin: 10px 0; }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>Research Data Statistics</h1>
-                        
-                        <div class="highlight">
-                            <h3>Summary</h3>
-                            <p><strong>Total Responses:</strong> ${stats.totalResponses}</p>
-                            <p><strong>Average Age:</strong> ${stats.averageAge} years</p>
-                            <p><strong>Data Collection Period:</strong> ${new Date(collectedData[0].timestamp).toLocaleDateString()} - ${new Date(collectedData[collectedData.length-1].timestamp).toLocaleDateString()}</p>
-                        </div>
-                        
-                        <div class="stat-section">
-                            <h2>Gender Distribution</h2>
-                            ${Object.entries(stats.genderDistribution).map(([gender, count]) => 
-                                `<div class="stat-item"><span>${gender}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
-                            ).join('')}
-                        </div>
-                        
-                        <div class="stat-section">
-                            <h2>Age Groups</h2>
-                            ${Object.entries(stats.ageGroups).map(([group, count]) => 
-                                `<div class="stat-item"><span>${group}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
-                            ).join('')}
-                        </div>
-                        
-                        <div class="stat-section">
-                            <h2>Education Levels</h2>
-                            ${Object.entries(stats.educationLevels).map(([level, count]) => 
-                                `<div class="stat-item"><span>${level}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
-                            ).join('')}
-                        </div>
-                        
-                        <div class="stat-section">
-                            <h2>Digital Health Usage</h2>
-                            ${Object.entries(stats.digitalHealthUsage).map(([usage, count]) => 
-                                `<div class="stat-item"><span>${usage}:</span><span>${count} (${Math.round(count/stats.totalResponses*100)}%)</span></div>`
-                            ).join('')}
-                        </div>
-                    </body>
-                </html>
-            `);
-        }
-        
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Ctrl/Cmd + S to save/download CSV
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                downloadCSV();
-            }
-            
-            // Ctrl/Cmd + D to download JSON
-            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
-                e.preventDefault();
-                downloadJSON();
-            }
-        });
     </script>
-    
-    <!-- Add additional admin buttons -->
-    <div style="text-align: center; margin-top: 20px; padding: 20px;">
-        <button onclick="downloadJSON()" class="btn" style="background: #6f42c1; color: white;">
-            <i class="fas fa-file-code"></i> Download JSON
-        </button>
-        <button onclick="generateStats()" class="btn" style="background: #fd7e14; color: white;">
-            <i class="fas fa-chart-bar"></i> View Statistics
-        </button>
-    </div>
 </body>
 </html>
