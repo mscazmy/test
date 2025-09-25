@@ -3,459 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Collection Form</title>
+    <title>Ahmed Azeez Hasan - Public Health Specialist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
+        
+        .section-padding {
+            padding: 5rem 0;
         }
-
-        .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            padding: 30px;
-            text-align: center;
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            border-left: 2px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: -1rem;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: #0ea5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
         }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .form-container {
-            padding: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-            font-size: 1rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #4facfe;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
+        
+        .skill-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            flex: 1;
-            min-width: 150px;
-            justify-content: center;
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            margin: 0.25rem;
+            font-weight: 500;
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        
+        .nav-active {
+            color: #0ea5e9;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-
-        .data-summary {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
-            border-left: 5px solid #4facfe;
-        }
-
-        .data-summary h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-        }
-
-        .data-table th,
-        .data-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .data-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 600;
-        }
-
-        .data-table tr:hover {
-            background: #f8f9fa;
-        }
-
-        .success-message {
-            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            animation: slideInDown 0.5s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 3rem 0;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .form-group.required label::after {
-            content: " *";
-            color: #e74c3c;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>📊 Data Collection Hub</h1>
-            <p>Collect, store, and export your data seamlessly</p>
-        </div>
-        
-        <div class="form-container">
-            <div id="successMessage" class="success-message" style="display: none;">
-                ✅ Data submitted successfully!
-            </div>
-
-            <form id="dataForm">
-                <div class="form-row">
-                    <div class="form-group required">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group required">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
+<body class="bg-secondary-50 text-secondary-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-xl font-bold text-primary-700">Dr. Ahmed Azeez</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="hover:text-primary-600 transition-colors nav-active">About</a>
+                    <a href="#education" class="hover:text-primary-600 transition-colors">Education</a>
+                    <a href="#experience" class="hover:text-primary-600 transition-colors">Experience</a>
+                    <a href="#skills" class="hover:text-primary-600 transition-colors">Skills</a>
+                    <a href="#contact" class="hover:text-primary-600 transition-colors">Contact</a>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="age">Age</label>
-                        <input type="number" id="age" name="age" min="1" max="150">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="department">Department</label>
-                        <select id="department" name="department">
-                            <option value="">Select Department</option>
-                            <option value="Sales">Sales</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="HR">Human Resources</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="experience">Years of Experience</label>
-                        <input type="number" id="experience" name="experience" min="0" max="50">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="feedback">Comments/Feedback</label>
-                    <textarea id="feedback" name="feedback" placeholder="Please share your thoughts..."></textarea>
-                </div>
-
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary">
-                        📝 Submit Data
-                    </button>
-                    <button type="button" class="btn btn-secondary" onclick="downloadCSV()">
-                        📥 Download CSV
-                    </button>
-                    <button type="button" class="btn btn-success" onclick="clearAllData()">
-                        🗑️ Clear All Data
-                    </button>
-                </div>
-            </form>
-
-            <div class="data-summary">
-                <h3>📈 Collected Data Summary</h3>
-                <p><strong>Total Entries:</strong> <span id="totalEntries">0</span></p>
-                <div id="dataTableContainer"></div>
+                <button class="md:hidden">
+                    <i data-feather="menu"></i>
+                </button>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <script>
-        // Data storage
-        let collectedData = JSON.parse(localStorage.getItem('formData') || '[]');
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-br from-primary-50 to-secondary-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold text-secondary-900 mb-4">Dr. Ahmed Azeez Hasan</h1>
+                    <h2 class="text-xl md:text-2xl text-primary-600 mb-6">Public Health Specialist</h2>
+                    <p class="text-secondary-600 mb-8 leading-relaxed">Dedicated public health professional with expertise in epidemiology, biostatistics, and community health programs. Passionate about health education, applied research, and capacity building.</p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors flex items-center">
+                            <i data-feather="mail" class="mr-2"></i> Contact Me
+                        </a>
+                        <a href="#" class="border border-primary-600 text-primary-600 px-6 py-3 rounded-lg hover:bg-primary-50 transition-colors flex items-center">
+                            <i data-feather="download" class="mr-2"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-primary-200 rounded-full overflow-hidden shadow-xl">
+                        <img src="http://static.photos/medical/640x360/42" alt="Dr. Ahmed Azeez Hasan" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            updateDataDisplay();
-            
-            // Add form submission handler
-            document.getElementById('dataForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                submitForm();
-            });
-        });
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Profile Summary</h2>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-secondary-700 leading-relaxed mb-8">
+                    Public health professional with a Ph.D. in Community Medicine and Public Health and over 5 years of experience in teaching and research, particularly in epidemiology, biostatistics, and public health practice. Currently serving at Wasit Health District, with more than 10 years of experience in training health workers and contributing to community health programs.
+                </p>
+                <p class="text-lg text-secondary-700 leading-relaxed mb-8">
+                    Also involved in teaching medical students at Wasit College of Medicine. Holds a WHO e-Instructor certification and Training of Trainers (ToT) qualification, with a strong interest in health education, applied research, and capacity building.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                    <div class="flex items-center">
+                        <i data-feather="map-pin" class="text-primary-600 mr-4"></i>
+                        <div>
+                            <h3 class="font-semibold">Location</h3>
+                            <p class="text-secondary-600">Kut City, Wasit Governorate, Iraq</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-feather="phone" class="text-primary-600 mr-4"></i>
+                        <div>
+                            <h3 class="font-semibold">Phone</h3>
+                            <p class="text-secondary-600">+964 7724265093</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-feather="mail" class="text-primary-600 mr-4"></i>
+                        <div>
+                            <h3 class="font-semibold">Email</h3>
+                            <p class="text-secondary-600">ahmed.azeez1987@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-feather="globe" class="text-primary-600 mr-4"></i>
+                        <div>
+                            <h3 class="font-semibold">Languages</h3>
+                            <p class="text-secondary-600">Arabic (Native), English (Fluent)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function submitForm() {
-            const form = document.getElementById('dataForm');
-            const formData = new FormData(form);
-            
-            // Create data object
-            const dataEntry = {
-                timestamp: new Date().toLocaleString(),
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone') || '',
-                age: formData.get('age') || '',
-                department: formData.get('department') || '',
-                experience: formData.get('experience') || '',
-                feedback: formData.get('feedback') || ''
-            };
+    <!-- Education Section -->
+    <section id="education" class="section-padding bg-secondary-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Education</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i data-feather="award"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Ph.D. in Community Medicine and Public Health</h3>
+                    <p class="text-primary-600 font-medium mb-2">Universiti Sains Malaysia | 2021–2025</p>
+                    <p class="text-secondary-600">Epidemiology of Infectious Diseases</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i data-feather="book"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Master's Degree in Community Health</h3>
+                    <p class="text-primary-600 font-medium mb-2">Middle Technical University, Baghdad, Iraq | 2015–2018</p>
+                    <p class="text-secondary-600">GPA: 79.84% (College of Health and Medical Techniques)</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i data-feather="graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Bachelor's Degree in Community Health</h3>
+                    <p class="text-primary-600 font-medium mb-2">Middle Technical University, Baghdad, Iraq | 2006–2010</p>
+                    <p class="text-secondary-600">Graduated from College of Health and Medical Techniques in 2010</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Add to collection
-            collectedData.push(dataEntry);
-            
-            // Save to localStorage
-            localStorage.setItem('formData', JSON.stringify(collectedData));
-            
-            // Show success message
-            const successMsg = document.getElementById('successMessage');
-            successMsg.style.display = 'block';
-            setTimeout(() => {
-                successMsg.style.display = 'none';
-            }, 3000);
-            
-            // Reset form
-            form.reset();
-            
-            // Update display
-            updateDataDisplay();
-        }
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Professional Experience</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i data-feather="briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">PhD Researcher</h3>
+                    <p class="text-primary-600 font-medium mb-2">Universiti Sains Malaysia | 2021–2025</p>
+                    <p class="text-secondary-600 mb-4">Research in Community Medicine and Public Health, served as Postgraduate Student Representative and Journal Club Representative for the Department of Community Medicine</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i data-feather="users"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Community Health Specialist</h3>
+                    <p class="text-primary-600 font-medium mb-2">Public Health Department of Wasit – Iraq | 2018–2021</p>
+                    <p class="text-secondary-600 mb-4">Maternal and Child Health Division, conducted training for health workers and doctors on Antenatal Care (ANC), Integrated Management of Neonatal and Child Health (IMNCH), and Emergency Obstetric and Neonatal Care (EmONC)</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i data-feather="heart"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Public Health Department Roles</h3>
+                    <p class="text-primary-600 font-medium mb-2">Wasit – Iraq | 2010–2015</p>
+                    <p class="text-secondary-600">
+                        • Communicable Diseases and Health Visitor Units (2011–2013)<br>
+                        • Medical Unit and Pharmacy Unit at a health centre (2013–2014)<br>
+                        • Antenatal and Postnatal Care at a health centre (2014–2015)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function updateDataDisplay() {
-            document.getElementById('totalEntries').textContent = collectedData.length;
-            
-            const tableContainer = document.getElementById('dataTableContainer');
-            
-            if (collectedData.length === 0) {
-                tableContainer.innerHTML = '<p>No data collected yet. Submit the form to see entries here.</p>';
-                return;
-            }
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-secondary-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Skills & Expertise</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-12">
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Technical Skills</h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-badge"><i data-feather="bar-chart-2" class="mr-2"></i> Public health and epidemiological study design</span>
+                        <span class="skill-badge"><i data-feather="trending-up" class="mr-2"></i> SEM and path analysis (Mplus)</span>
+                        <span class="skill-badge"><i data-feather="clipboard" class="mr-2"></i> Instrument development, adaptation, and validation</span>
+                        <span class="skill-badge"><i data-feather="cpu" class="mr-2"></i> JAMOVI</span>
+                        <span class="skill-badge"><i data-feather="database" class="mr-2"></i> JASP</span>
+                        <span class="skill-badge"><i data-feather="code" class="mr-2"></i> R Programming</span>
+                        <span class="skill-badge"><i data-feather="layers" class="mr-2"></i> Mplus</span>
+                    </div>
+                </div>
+                
+                <div class="mb-12">
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Professional Certifications</h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-badge bg-primary-100 text-primary-800"><i data-feather="award" class="mr-2"></i> WHO e-Instructor Certified</span>
+                        <span class="skill-badge bg-primary-100 text-primary-800"><i data-feather="user-check" class="mr-2"></i> Training of Trainers (ToT) Certified</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Areas of Expertise</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-start">
+                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
+                            <span>Health Education</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
+                            <span>Applied Research</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
+                            <span>Capacity Building</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
+                            <span>Epidemiology</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
+                            <span>Biostatistics</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
+                            <span>Community Health Programs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            let tableHTML = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Timestamp</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Age</th>
-                            <th>Department</th>
-                            <th>Experience</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            collectedData.forEach(entry => {
-                tableHTML += `
-                    <tr>
-                        <td>${entry.timestamp}</td>
-                        <td>${entry.name}</td>
-                        <td>${entry.email}</td>
-                        <td>${entry.phone}</td>
-                        <td>${entry.age}</td>
-                        <td>${entry.department}</td>
-                        <td>${entry.experience}</td>
-                    </tr>
-                `;
-            });
-
-            tableHTML += '</tbody></table>';
-            tableContainer.innerHTML = tableHTML;
-        }
-
-        function downloadCSV() {
-            if (collectedData.length === 0) {
-                alert('No data to download. Please submit some entries first.');
-                return;
-            }
-
-            // Create CSV content
-            const headers = ['Timestamp', 'Name', 'Email', 'Phone', 'Age', 'Department', 'Experience (Years)', 'Comments/Feedback'];
-            let csvContent = headers.join(',') + '\n';
-
-            collectedData.forEach(entry => {
-                const row = [
-                    entry.timestamp,
-                    entry.name,
-                    entry.email,
-                    entry.phone,
-                    entry.age,
-                    entry.department,
-                    entry.experience,
-                    '"' + (entry.feedback || '').replace(/"/g, '""') + '"' // Escape quotes in feedback
-                ];
-                csvContent += row.join(',') + '\n';
-            });
-
-            // Create and download file
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', `collected_data_${new Date().toISOString().split('T')[0]}.csv`);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function clearAllData() {
-            if (confirm('Are you sure you want to clear all collected data? This action cannot be undone.')) {
-                collectedData = [];
-                localStorage.removeItem('formData');
-                updateDataDisplay();
-                alert('All data has been cleared.');
-            }
-        }
-    </script>
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="bg-primary-100 p-3 rounded-full mr-4">
+                                <i data-feather="mail" class="text-primary-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Email</p>
+                                <p class="text-secondary-
 </body>
 </html>
