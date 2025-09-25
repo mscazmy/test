@@ -3,346 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Azeez Hasan - Public Health Specialist</title>
+    <title>Ahmed Azeez Hasan | Public Health Specialist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                        secondary: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
         }
         
-        .section-padding {
-            padding: 5rem 0;
-        }
-        
-        .timeline-item {
+        .section-heading {
             position: relative;
-            padding-left: 2.5rem;
-            border-left: 2px solid #e5e7eb;
-            margin-bottom: 2rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
         }
         
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .timeline-icon {
+        .section-heading::after {
+            content: '';
             position: absolute;
-            left: -1rem;
-            top: 0;
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background: #0ea5e9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: #2c3e50;
+        }
+        
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         .skill-badge {
-            display: inline-flex;
-            align-items: center;
-            background: #f1f5f9;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            margin: 0.25rem;
-            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        .nav-active {
-            color: #0ea5e9;
+        .skill-badge:hover {
+            transform: scale(1.05);
+            background-color: #2c3e50;
+            color: white;
         }
         
         @media (max-width: 768px) {
-            .section-padding {
-                padding: 3rem 0;
+            .section-heading::after {
+                width: 30%;
             }
         }
     </style>
 </head>
-<body class="bg-secondary-50 text-secondary-800">
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-white shadow-md z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#" class="text-xl font-bold text-primary-700">Dr. Ahmed Azeez</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="hover:text-primary-600 transition-colors nav-active">About</a>
-                    <a href="#education" class="hover:text-primary-600 transition-colors">Education</a>
-                    <a href="#experience" class="hover:text-primary-600 transition-colors">Experience</a>
-                    <a href="#skills" class="hover:text-primary-600 transition-colors">Skills</a>
-                    <a href="#contact" class="hover:text-primary-600 transition-colors">Contact</a>
-                </div>
-                <button class="md:hidden">
-                    <i data-feather="menu"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 bg-gradient-to-br from-primary-50 to-secondary-100">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold text-secondary-900 mb-4">Dr. Ahmed Azeez Hasan</h1>
-                    <h2 class="text-xl md:text-2xl text-primary-600 mb-6">Public Health Specialist</h2>
-                    <p class="text-secondary-600 mb-8 leading-relaxed">Dedicated public health professional with expertise in epidemiology, biostatistics, and community health programs. Passionate about health education, applied research, and capacity building.</p>
-                    <div class="flex space-x-4">
-                        <a href="#contact" class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors flex items-center">
-                            <i data-feather="mail" class="mr-2"></i> Contact Me
-                        </a>
-                        <a href="#" class="border border-primary-600 text-primary-600 px-6 py-3 rounded-lg hover:bg-primary-50 transition-colors flex items-center">
-                            <i data-feather="download" class="mr-2"></i> Download CV
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="w-64 h-64 md:w-80 md:h-80 bg-primary-200 rounded-full overflow-hidden shadow-xl">
-                        <img src="http://static.photos/medical/640x360/42" alt="Dr. Ahmed Azeez Hasan" class="w-full h-full object-cover">
-                    </div>
+<body class="bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-[#2c3e50] text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-2">Ahmed Azeez Hasan</h1>
+            <p class="text-xl opacity-90">Public Health Specialist</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="tel:+9647724265093" class="flex items-center hover:text-blue-200 transition">
+                    <i data-feather="phone" class="mr-2"></i>
+                    <span>+964 7724265093</span>
+                </a>
+                <a href="mailto:ahmed.azeez1987@gmail.com" class="flex items-center hover:text-blue-200 transition">
+                    <i data-feather="mail" class="mr-2"></i>
+                    <span>ahmed.azeez1987@gmail.com</span>
+                </a>
+                <div class="flex items-center">
+                    <i data-feather="map-pin" class="mr-2"></i>
+                    <span>Kut City, Wasit Governorate, Iraq</span>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- About Section -->
-    <section id="about" class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Profile Summary</h2>
-            <div class="max-w-3xl mx-auto">
-                <p class="text-lg text-secondary-700 leading-relaxed mb-8">
-                    Public health professional with a Ph.D. in Community Medicine and Public Health and over 5 years of experience in teaching and research, particularly in epidemiology, biostatistics, and public health practice. Currently serving at Wasit Health District, with more than 10 years of experience in training health workers and contributing to community health programs.
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <!-- Profile Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold section-heading">Professional Profile</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <p class="text-lg leading-relaxed">
+                    Public health professional with a Ph.D. in Community Medicine and Public Health and over 5 years of experience in teaching and research, particularly in epidemiology, biostatistics, and public health practice. Currently serving at Wasit Health District, with more than 10 years of experience in training health workers and contributing to community health programs. Also involved in teaching medical students at Wasit College of Medicine. Holds a WHO e-Instructor certification and Training of Trainers (ToT) qualification, with a strong interest in health education, applied research, and capacity building.
                 </p>
-                <p class="text-lg text-secondary-700 leading-relaxed mb-8">
-                    Also involved in teaching medical students at Wasit College of Medicine. Holds a WHO e-Instructor certification and Training of Trainers (ToT) qualification, with a strong interest in health education, applied research, and capacity building.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                    <div class="flex items-center">
-                        <i data-feather="map-pin" class="text-primary-600 mr-4"></i>
-                        <div>
-                            <h3 class="font-semibold">Location</h3>
-                            <p class="text-secondary-600">Kut City, Wasit Governorate, Iraq</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <i data-feather="phone" class="text-primary-600 mr-4"></i>
-                        <div>
-                            <h3 class="font-semibold">Phone</h3>
-                            <p class="text-secondary-600">+964 7724265093</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <i data-feather="mail" class="text-primary-600 mr-4"></i>
-                        <div>
-                            <h3 class="font-semibold">Email</h3>
-                            <p class="text-secondary-600">ahmed.azeez1987@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <i data-feather="globe" class="text-primary-600 mr-4"></i>
-                        <div>
-                            <h3 class="font-semibold">Languages</h3>
-                            <p class="text-secondary-600">Arabic (Native), English (Fluent)</p>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Education Section -->
-    <section id="education" class="section-padding bg-secondary-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Education</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i data-feather="award"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Ph.D. in Community Medicine and Public Health</h3>
-                    <p class="text-primary-600 font-medium mb-2">Universiti Sains Malaysia | 2021–2025</p>
-                    <p class="text-secondary-600">Epidemiology of Infectious Diseases</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i data-feather="book"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Master's Degree in Community Health</h3>
-                    <p class="text-primary-600 font-medium mb-2">Middle Technical University, Baghdad, Iraq | 2015–2018</p>
-                    <p class="text-secondary-600">GPA: 79.84% (College of Health and Medical Techniques)</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i data-feather="graduation-cap"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Bachelor's Degree in Community Health</h3>
-                    <p class="text-primary-600 font-medium mb-2">Middle Technical University, Baghdad, Iraq | 2006–2010</p>
-                    <p class="text-secondary-600">Graduated from College of Health and Medical Techniques in 2010</p>
-                </div>
+        <!-- Education Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold section-heading">Education</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <ul class="space-y-6">
+                    <li class="border-l-4 border-[#2c3e50] pl-4 py-2">
+                        <h3 class="text-xl font-semibold">Ph.D. in Community Medicine and Public Health</h3>
+                        <p class="text-gray-600">Universiti Sains Malaysia | 2021 - 2025</p>
+                        <p class="text-sm text-gray-500 mt-1">Completed within the prescribed period for the Ph.D. in Community Medicine and Public Health - Epidemiology of Infectious Diseases</p>
+                    </li>
+                    <li class="border-l-4 border-[#2c3e50] pl-4 py-2">
+                        <h3 class="text-xl font-semibold">Master's Degree in Community Health</h3>
+                        <p class="text-gray-600">Middle Technical University, Baghdad, Iraq | 2015 - 2018</p>
+                        <p class="text-sm text-gray-500 mt-1">Graduated with a GPA of 79.84% from the College of Health and Medical Techniques</p>
+                    </li>
+                    <li class="border-l-4 border-[#2c3e50] pl-4 py-2">
+                        <h3 class="text-xl font-semibold">Bachelor's Degree in Community Health</h3>
+                        <p class="text-gray-600">Middle Technical University, Baghdad, Iraq | 2006 - 2010</p>
+                        <p class="text-sm text-gray-500 mt-1">Graduated from College of Health and Medical Techniques in 2010</p>
+                    </li>
+                </ul>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Professional Experience</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i data-feather="briefcase"></i>
+        <!-- Experience Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold section-heading">Professional Experience</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-xl font-semibold">PhD Researcher</h3>
+                        <p class="text-gray-600">University Sains Malaysia | 2021-2025</p>
+                        <p class="mt-2">Ph.D. researcher in Community Medicine and Public Health at Universiti Sains Malaysia (USM). Serving as the Postgraduate Student Representative and Journal Club Representative for the Department of Community Medicine.</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">PhD Researcher</h3>
-                    <p class="text-primary-600 font-medium mb-2">Universiti Sains Malaysia | 2021–2025</p>
-                    <p class="text-secondary-600 mb-4">Research in Community Medicine and Public Health, served as Postgraduate Student Representative and Journal Club Representative for the Department of Community Medicine</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i data-feather="users"></i>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold">Community Health Specialist</h3>
+                        <p class="text-gray-600">Public Health Department of Wasit - Iraq | 2018 - 2021</p>
+                        <p class="mt-2">Maternal and Child Health Division, Public Health Department, Wasit. Conducted training for health workers and doctors on Antenatal Care (ANC), Integrated Management of Neonatal and Child Health (IMNCH), and Emergency Obstetric and Neonatal Care (EmONC).</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Community Health Specialist</h3>
-                    <p class="text-primary-600 font-medium mb-2">Public Health Department of Wasit – Iraq | 2018–2021</p>
-                    <p class="text-secondary-600 mb-4">Maternal and Child Health Division, conducted training for health workers and doctors on Antenatal Care (ANC), Integrated Management of Neonatal and Child Health (IMNCH), and Emergency Obstetric and Neonatal Care (EmONC)</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i data-feather="heart"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Public Health Department Roles</h3>
-                    <p class="text-primary-600 font-medium mb-2">Wasit – Iraq | 2010–2015</p>
-                    <p class="text-secondary-600">
-                        • Communicable Diseases and Health Visitor Units (2011–2013)<br>
-                        • Medical Unit and Pharmacy Unit at a health centre (2013–2014)<br>
-                        • Antenatal and Postnatal Care at a health centre (2014–2015)
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section-padding bg-secondary-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Skills & Expertise</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="mb-12">
-                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Technical Skills</h3>
-                    <div class="flex flex-wrap">
-                        <span class="skill-badge"><i data-feather="bar-chart-2" class="mr-2"></i> Public health and epidemiological study design</span>
-                        <span class="skill-badge"><i data-feather="trending-up" class="mr-2"></i> SEM and path analysis (Mplus)</span>
-                        <span class="skill-badge"><i data-feather="clipboard" class="mr-2"></i> Instrument development, adaptation, and validation</span>
-                        <span class="skill-badge"><i data-feather="cpu" class="mr-2"></i> JAMOVI</span>
-                        <span class="skill-badge"><i data-feather="database" class="mr-2"></i> JASP</span>
-                        <span class="skill-badge"><i data-feather="code" class="mr-2"></i> R Programming</span>
-                        <span class="skill-badge"><i data-feather="layers" class="mr-2"></i> Mplus</span>
-                    </div>
-                </div>
-                
-                <div class="mb-12">
-                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Professional Certifications</h3>
-                    <div class="flex flex-wrap">
-                        <span class="skill-badge bg-primary-100 text-primary-800"><i data-feather="award" class="mr-2"></i> WHO e-Instructor Certified</span>
-                        <span class="skill-badge bg-primary-100 text-primary-800"><i data-feather="user-check" class="mr-2"></i> Training of Trainers (ToT) Certified</span>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Areas of Expertise</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="flex items-start">
-                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
-                            <span>Health Education</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
-                            <span>Applied Research</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
-                            <span>Capacity Building</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
-                            <span>Epidemiology</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
-                            <span>Biostatistics</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i data-feather="check-circle" class="text-green-500 mt-1 mr-3"></i>
-                            <span>Community Health Programs</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 text-secondary-900">Get In Touch</h2>
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-xl font-semibold mb-6 text-primary-700">Contact Information</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="bg-primary-100 p-3 rounded-full mr-4">
-                                <i data-feather="mail" class="text-primary-600"></i>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold">Public Health Department of Wasit - Iraq</h3>
+                        <div class="ml-6 mt-3 space-y-3">
+                            <div class="flex items-start">
+                                <i data-feather="chevron-right" class="text-[#2c3e50] mt-1 mr-2"></i>
+                                <p>Communicable Diseases and Health Visitor Units, Wasit health department (2011-2013)</p>
                             </div>
-                            <div>
-                                <p class="font-medium">Email</p>
-                                <p class="text-secondary-
+                            <div class="flex items-start">
+                                <i data-feather="chevron-right" class="text-[#2c3e50] mt-1 mr-2"></i>
+                                <p>One year in the Medical Unit and Pharmacy Unit at a health centre (2013-2014)</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i data-feather="chevron-right" class="text-[#2c3e50] mt-1 mr-2"></i>
+                                <p>One year in Antenatal and Postnatal Care at a health centre (2014-2015)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold section-heading">Skills & Expertise</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-badge bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">Public health and epidemiological study design</span>
+                    <span class="skill-badge bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">SEM and path analysis (Mplus)</span>
+                    <span class="skill-badge bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">Instrument development, adaptation, and validation</span>
+                    <span class="skill-badge bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">JAMOVI, JASP, R, and Mplus</span>
+                    <span class="skill-badge bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">Health worker training (ToT certified)</span>
+                    <span class="skill-badge bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">WHO e-Instructor</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold section-heading">Languages</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex flex-wrap gap-6">
+                    <div class="flex items-center">
+                        <i data-feather="check-circle" class="text-green-500 mr-2"></i>
+                        <span class="font-medium">Arabic</span>
+                        <span class="text-gray-500 ml-2">(Native)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-feather="check-circle" class="text-green-500 mr-2"></i>
+                        <span class="font-medium">English</span>
+                        <span class="text-gray-500 ml-2">(Fluent)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Online Profiles Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold section-heading">Online Profiles</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex flex-col space-y-4">
+                    <a href="https://linkedin.com/in/ahmed-a-hasan" target="_blank" class="flex items-center text-blue-600 hover:text-blue-800 transition">
+                        <i data-feather="linkedin" class="mr-3"></i>
+                        <span>Ahmed A. Hasan</span>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-9004-9689" target="_blank" class="flex items-center text-green-600 hover:text-green-800 transition">
+                        <i data-feather="award" class="mr-3"></i>
+                        <span>ORCID Profile</span>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=ahmed-aziz-hasan" target="_blank" class="flex items-center text-red-600 hover:text-red-800 transition">
+                        <i data-feather="book-open" class="mr-3"></i>
+                        <span>Ahmed Aziz Hasan - Google Scholar</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- References Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold section-heading">References</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="space-y-6">
+                    <div class="border-l-4 border-[#2c3e50] pl-4 py-2">
+                        <h3 class="text-xl font-semibold">Assoc. Prof. Dr. Najib Majdi Yaacob</h3>
+                        <p class="text-gray-600">Unit of Biostatistic and Research Methods/ USM</p>
+                        <div class="mt-2 space-y-1">
+                            <p class="flex items-center">
+                                <i data-feather="phone" class="mr-2 text-sm"></i>
+                                <span>+60 19 946 2312</span>
+                            </p>
+                            <p class="flex items-center">
+                                <i data-feather="mail" class="mr-2 text-sm"></i>
+                                <span>najibmy@usm.my</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border-l-4 border-[#2c3e50] pl-4 py-2">
+                        <h3 class="text-xl font-semibold">Dr. Anis Kausar Ghazali</h3>
+                        <p class="text-gray-600">Unit of Biostatistic and Research Methods/ USM</p>
+                        <div class="mt-2 space-y-1">
+                            <p class="flex items-center">
+                                <i data-feather="phone" class="mr-2 text-sm"></i>
+                                <span>+60 11 6138 4953</span>
+                            </p>
+                            <p class="flex items-center">
+                                <i data-feather="mail" class="mr-2 text-sm"></i>
+                                <span>anisyo@usm.my</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#2c3e50] text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p>© 2024 Ahmed Azeez Hasan. All rights reserved.</p>
+            <p class="mt-2 text-sm opacity-80">Public Health Specialist & Researcher</p>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Add subtle animations to elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            const options = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+            
+            cards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
